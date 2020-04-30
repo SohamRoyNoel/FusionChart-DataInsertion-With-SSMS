@@ -10,8 +10,18 @@
   	<description></description>
   	<servlet-class>Servlets.FusionServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>LokkhonRekhaController</servlet-name>
+  	<display-name>LokkhonRekhaController</display-name>
+  	<description></description>
+  	<servlet-class>Servlets.LokkhonRekhaController</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>FusionServlet</servlet-name>
   	<url-pattern>/FusionServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>LokkhonRekhaController</servlet-name>
+  	<url-pattern>/LokkhonRekhaController</url-pattern>
   </servlet-mapping>
 </web-app>

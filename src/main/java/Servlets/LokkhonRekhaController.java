@@ -16,41 +16,44 @@ import com.google.gson.Gson;
 
 import connectionFactory.Connections;
 
-
-public class FusionServlet extends HttpServlet {
+public class LokkhonRekhaController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public FusionServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public LokkhonRekhaController() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+    
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String jsonx = null;
 		Connection cn = null;
 		Statement st = null;
 		ResultSet rs = null;
 		Map<String, String> mps = new HashMap<String, String>();
 
-		String askFusion = "select * from Customer";
+		String askFusion = "select * from Investments";
 		String fm = "";
 		String appendMe = "";
+		String lokkhonRekha = "";
 		
 		String sm ="";
-		String fuckingChrist = "";
+		String fc = "";
+		String lr = "";
 
 		try {
 			cn = Connections.getConnection();
 			st = cn.createStatement();
 			rs = st.executeQuery(askFusion);
 			while(rs.next()) {
-				//mps.put(rs.getString(1), rs.getString(2));
-				fm = "{ \"value\":\""+rs.getFloat(3)+"\"}";
-				System.out.println(rs.getFloat(3));
+				fm = "{ \"value\":\""+rs.getFloat(5)+"\"}";
 				sm = "{ \"label\":\""+rs.getString(2)+"\"}";
+				lr = "{ \"value\":\""+rs.getString(3)+"\"}";
 				appendMe += ","+fm;
-				fuckingChrist += ","+sm;
+				fc += ","+sm;
+				lokkhonRekha += ","+lr;
 			}
+			String modlok = lokkhonRekha.substring(1);
+			//System.out.println("Lokkhon : "+ modlok);
 			
 			String chart = "\"chart\": {"+
                 "\"theme\": \"fusion\","+
@@ -62,7 +65,7 @@ public class FusionServlet extends HttpServlet {
                 "\"valueFontColor\": \"#ffffff\","+
                 "\"numberprefix\": \"\","+
                 "\"numVisiblePlot\": \"15\","+
-                "\"showLabels\": \"0\","+
+                "\"showLabels\": \"1\","+
                 "\"labeldisplay\": \"WRAP\","+
                 "\"linethickness\": \"3\","+
                 "\"scrollheight\": \"10\","+
@@ -73,14 +76,15 @@ public class FusionServlet extends HttpServlet {
                 
               "}";
 			
-			String modifiedDataset = "\"dataset\": [{\"data\":["+appendMe.substring(1)+"]}]";
-			String modifiedCategories = "\"categories\": [{\"category\":["+fuckingChrist.substring(1)+"]}]";
-			//String modifiedChart = "{type: 'scrollbar2d',renderAt: 'containerss', width: '600',height: '500',dataFormat: 'json',dataSource: { \"chart\": {plottooltext: \"$dataValue Downloads\", theme: \"fusion\"},"+modifiedCategories+","+modifiedDataset+"}}";
-			String modifiedChart = "{"+chart+","+modifiedCategories+","+modifiedDataset+"}";
-//			String modifiedChart = "{"+modifiedDataset+"}";
+			String modifiedDataset = "\"dataset\": [{\"data\":["+appendMe.substring(1)+"]}";
+			String modifiedCategories = "\"categories\": [{\"category\":["+fc.substring(1)+"]}]";
+			String modlok1 = "{ \"seriesName\": \"Projected Revenue\", \"renderAs\": \"line\", \"showValues\": \"0\", \"data\": [ " + modlok + "]}";
+			String modifiedChart = "{"+chart+","+modifiedCategories+","+modifiedDataset+","+ modlok1 +"]}";
+			
+			//String modifiedChart = "{"+modifiedDataset+"}";
 
 
-			System.out.println(modifiedChart);
+			System.out.println("modifiedChart : " + modifiedChart);
 			jsonx = new Gson().toJson(modifiedChart);
 //			response.setContentType("text/json");
 //			response.getWriter().write(modifiedChart);
