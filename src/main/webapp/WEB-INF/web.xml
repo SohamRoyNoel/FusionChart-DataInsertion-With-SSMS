@@ -16,6 +16,12 @@
   	<description></description>
   	<servlet-class>Servlets.LokkhonRekhaController</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>MultiSeriesBar2DChart</servlet-name>
+  	<display-name>MultiSeriesBar2DChart</display-name>
+  	<description></description>
+  	<servlet-class>Servlets.MultiSeriesBar2DChart</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>FusionServlet</servlet-name>
   	<url-pattern>/FusionServlet</url-pattern>
@@ -23,5 +29,9 @@
   <servlet-mapping>
   	<servlet-name>LokkhonRekhaController</servlet-name>
   	<url-pattern>/LokkhonRekhaController</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>MultiSeriesBar2DChart</servlet-name>
+  	<url-pattern>/MultiSeriesBar2DChart</url-pattern>
   </servlet-mapping>
 </web-app>
