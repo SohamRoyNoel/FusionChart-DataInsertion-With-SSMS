@@ -22,6 +22,12 @@
   	<description></description>
   	<servlet-class>Servlets.MultiSeriesBar2DChart</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>TimeLineGraphController</servlet-name>
+  	<display-name>TimeLineGraphController</display-name>
+  	<description></description>
+  	<servlet-class>Servlets.TimeLineGraphController</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>FusionServlet</servlet-name>
   	<url-pattern>/FusionServlet</url-pattern>
@@ -33,5 +39,9 @@
   <servlet-mapping>
   	<servlet-name>MultiSeriesBar2DChart</servlet-name>
   	<url-pattern>/MultiSeriesBar2DChart</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>TimeLineGraphController</servlet-name>
+  	<url-pattern>/TimeLineGraphController</url-pattern>
   </servlet-mapping>
 </web-app>

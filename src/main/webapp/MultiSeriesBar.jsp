@@ -28,7 +28,7 @@
       	    	console.log(x);
       	    	var topStores='';
       	    	FusionCharts.ready(function(x) {
-      	    		alert("How low");
+      	    		//alert("How low");
       	    		//var FusionCharts = require('fusioncharts');  
       	    		var xx = x;
       	    		console.log(xx);
