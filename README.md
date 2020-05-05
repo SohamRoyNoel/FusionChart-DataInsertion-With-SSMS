@@ -13,3 +13,6 @@
 
 # Line Graph
 ![github-small](https://github.com/SohamRoyNoel/FusionChart-DataInsertion-With-SSMS/blob/master/Line%20chart.PNG?raw=true)
+
+# Dependent Graph - with line
+![github-small](https://github.com/SohamRoyNoel/FusionChart-DataInsertion-With-SSMS/blob/master/dependent%20graph.PNG?raw=true)
