@@ -29,6 +29,11 @@ public class LineSeriesServlet extends HttpServlet {
     	return askFusion;
     }
     
+    public static String askFusion(String startDate, String endDate, String custNm) {
+    	String askFusion = "select name, payment from DependentTable where convert(date,Dates) between '"+startDate+"' and '"+endDate+"' and name='"+custNm+"' group by name, Payment";
+    	return askFusion;
+    }
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String jsonx = null;
 		Connection cn = null;
@@ -48,9 +53,9 @@ public class LineSeriesServlet extends HttpServlet {
 		String multiSeries = "";
 		String finalDataset = "";
 
-		String askMaxTimetakenCharts = "select top 5 PageName as pg , Avg(TimeTaken) as avgCal from PageTimeLine where convert(date,date) between '2020-04-25' and '2020-04-30' group by PageName order by avgCal desc";
+		String askMaxTimetakenCharts = "select distinct name from DependentTable";
 //		String askMaxTimetakenCharts = "select top 5 PageName as pg , Avg(TimeTaken) as avgCal from PageTimeLine group by PageName order by avgCal desc";
-		String maxPlot = "select Top 1 pageName, Count(PageName) as pg , Avg(TimeTaken) as avgCal from PageTimeLine group by PageName order by pg desc";
+		String maxPlot = "select distinct name from DependentTable";
 		//String askFusion = "select * from PageTimeLine where PageName = ''";
 		String fm = "";
 		String appendMe = "";
@@ -59,6 +64,9 @@ public class LineSeriesServlet extends HttpServlet {
 		String sm ="";
 		String fc = "";
 		String lr = "";
+		
+		String startDate = "2020-04-27" ;
+		String endDate ="2020-04-29";
 
 		try {
 			cn = Connections.getConnection();
@@ -67,16 +75,17 @@ public class LineSeriesServlet extends HttpServlet {
 			rs = st.executeQuery(askMaxTimetakenCharts);
 			while(rs.next()) {
 				String lokkhonRekha = "";
-				String q = askFusion(rs.getString(1));
-//				System.out.println("Q : " + q);
-				rs1 = st1.executeQuery(q);
+				String q = rs.getString(1);
+				System.out.println("Q : " + askFusion(startDate, endDate, q));
+				
+				rs1 = st1.executeQuery(askFusion(startDate, endDate, q));
 				while(rs1.next()) {
-					lr = "{ \"value\":\""+rs1.getFloat(3)+"\"}";
+					lr = "{ \"value\":\""+rs1.getFloat(2)+"\"}";
 					lokkhonRekha += ","+lr;
 					//System.out.println("Lokkhon : " + lokkhonRekha);
 				}
 				modlok = lokkhonRekha.substring(1);
-				seriesName = "{\"seriesname\": \""+rs.getString(1)+"\", \"data\": ["+modlok+"]},";
+				seriesName = "{\"seriesname\": \""+(startDate+" to "+ endDate)+"\", \"data\": ["+modlok+"]},";
 				multiSeries += seriesName;
 			}
 			String newMulti = multiSeries.substring(0, multiSeries.length()-1);
@@ -85,15 +94,16 @@ public class LineSeriesServlet extends HttpServlet {
 			rs2 = st.executeQuery(maxPlot);
 			String maxElelemtCounter = "";
 			while(rs2.next()) {
-				maxElelemtCounter = rs2.getString(2);
-				
+				maxElelemtCounter = rs2.getString(1);
+				cat = "{ \"label\":\""+maxElelemtCounter+"\"}";
+				category += ","+cat;
 			}
 			
 			// category
-			for(int i=0; i<=Integer.parseInt(maxElelemtCounter); i++) {
-				cat = "{ \"label\":\"Round-"+(i+1)+"\"}";
-				category += ","+cat;
-			}
+//			for(int i=0; i<=Integer.parseInt(maxElelemtCounter); i++) {
+//				cat = "{ \"label\":\"Round-"+(i+1)+"\"}";
+//				category += ","+cat;
+//			}
 			
 			modCategory = category.substring(1);
 			
