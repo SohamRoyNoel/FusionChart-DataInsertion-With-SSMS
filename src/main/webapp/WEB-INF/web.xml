@@ -28,6 +28,24 @@
   	<description></description>
   	<servlet-class>Servlets.TimeLineGraphController</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>LinkedChartServlet</servlet-name>
+  	<display-name>LinkedChartServlet</display-name>
+  	<description></description>
+  	<servlet-class>Servlets.LinkedChartServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>LinkedchartServlet2</servlet-name>
+  	<display-name>LinkedchartServlet2</display-name>
+  	<description></description>
+  	<servlet-class>Servlets.LinkedchartServlet2</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>LineSeriesServlet</servlet-name>
+  	<display-name>LineSeriesServlet</display-name>
+  	<description></description>
+  	<servlet-class>Servlets.LineSeriesServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>FusionServlet</servlet-name>
   	<url-pattern>/FusionServlet</url-pattern>
@@ -43,5 +61,17 @@
   <servlet-mapping>
   	<servlet-name>TimeLineGraphController</servlet-name>
   	<url-pattern>/TimeLineGraphController</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>LinkedChartServlet</servlet-name>
+  	<url-pattern>/LinkedChartServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>LinkedchartServlet2</servlet-name>
+  	<url-pattern>/LinkedchartServlet2</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>LineSeriesServlet</servlet-name>
+  	<url-pattern>/LineSeriesServlet</url-pattern>
   </servlet-mapping>
 </web-app>

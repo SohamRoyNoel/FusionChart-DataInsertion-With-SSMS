@@ -16,10 +16,10 @@ import com.google.gson.Gson;
 
 import connectionFactory.Connections;
 
-public class TimeLineGraphController extends HttpServlet {
+public class LineSeriesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public TimeLineGraphController() {
+    public LineSeriesServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -48,7 +48,8 @@ public class TimeLineGraphController extends HttpServlet {
 		String multiSeries = "";
 		String finalDataset = "";
 
-		String askMaxTimetakenCharts = "select top 5 PageName as pg , Avg(TimeTaken) as avgCal from PageTimeLine group by PageName order by avgCal desc";
+		String askMaxTimetakenCharts = "select top 5 PageName as pg , Avg(TimeTaken) as avgCal from PageTimeLine where convert(date,date) between '2020-04-25' and '2020-04-30' group by PageName order by avgCal desc";
+//		String askMaxTimetakenCharts = "select top 5 PageName as pg , Avg(TimeTaken) as avgCal from PageTimeLine group by PageName order by avgCal desc";
 		String maxPlot = "select Top 1 pageName, Count(PageName) as pg , Avg(TimeTaken) as avgCal from PageTimeLine group by PageName order by pg desc";
 		//String askFusion = "select * from PageTimeLine where PageName = ''";
 		String fm = "";
@@ -88,6 +89,7 @@ public class TimeLineGraphController extends HttpServlet {
 				
 			}
 			
+			// category
 			for(int i=0; i<=Integer.parseInt(maxElelemtCounter); i++) {
 				cat = "{ \"label\":\"Round-"+(i+1)+"\"}";
 				category += ","+cat;
