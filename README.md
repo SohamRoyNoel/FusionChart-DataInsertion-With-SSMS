@@ -10,3 +10,6 @@
 
 # Double Graph
 ![github-small](https://github.com/SohamRoyNoel/FusionChart-DataInsertion-With-SSMS/blob/master/Double2.PNG?raw=true)
+
+# Line Graph
+![github-small](https://github.com/SohamRoyNoel/FusionChart-DataInsertion-With-SSMS/blob/master/Line%20chart.PNG?raw=true)
