@@ -25,7 +25,7 @@ public class LinkedchartServlet2 extends HttpServlet {
     }
     
     public static String askFusion(String name) {
-    	String askFusion = "select payment, convert(date,date) as date from DependentTable where name= '"+ name +"'";
+    	String askFusion = "select payment, convert(date,date) as date from DependentTable where name= '"+ name +"'"; // select page_load
     	return askFusion;
     }
     
